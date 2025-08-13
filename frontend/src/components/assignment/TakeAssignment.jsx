@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const fadeIn = keyframes`
@@ -313,7 +314,7 @@ const FileDownloadButton = styled(Button)`
   }
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0; // Get colid from localStorage or default to 0
+const colid = parseInt(global1.colid) || 0; 
 
 const shuffleArray = (array) => {
   const newArray = [...array];
@@ -422,15 +423,14 @@ const handleFileUpload = async (assignmentId, file) => {
 };
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem('user_id') || `Student_${Math.random().toString(36).substr(2, 9)}`;
-    localStorage.setItem('assignmentUserId', storedUserId);
+    const storedUserId = global1.user_id || `Student_${Math.random().toString(36).substr(2, 9)}`;
+    global1.assignmentUserId = storedUserId;
     setUserId(storedUserId);
 
-    const rawAttempts = localStorage.getItem('assignmentAttempts');
-    const parsedAttempts = rawAttempts ? JSON.parse(rawAttempts) : {};
+    const parsedAttempts = global1.assignmentAttempts || {};
     if (!parsedAttempts[storedUserId]) {
       parsedAttempts[storedUserId] = {};
-      localStorage.setItem('assignmentAttempts', JSON.stringify(parsedAttempts));
+      global1.assignmentAttempts = parsedAttempts;
     }
     setAttempts(parsedAttempts[storedUserId]);
 
@@ -633,9 +633,8 @@ useEffect(() => {
 
     setAttempts(updatedUserAttempts);
 
-    const fullAttempts = JSON.parse(localStorage.getItem("assignmentAttempts")) || {};
-    fullAttempts[userId] = updatedUserAttempts;
-    localStorage.setItem("assignmentAttempts", JSON.stringify(fullAttempts));
+    global1.assignmentAttempts = global1.assignmentAttempts || {};
+    global1.assignmentAttempts[userId] = updatedUserAttempts;
   };
 
 const fetchExplanations = async (submissionData, assignmentData) => {

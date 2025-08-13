@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import * as XLSX from 'xlsx';
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const Container = styled.div`
@@ -273,7 +274,7 @@ const LoadingDots = styled.div`
   }
 `;
 
-const colid = parseInt(localStorage.getItem('colid'), 10);
+const colid = parseInt(global1.colid, 10);
 
 // Animation variants
 const questionVariants = {

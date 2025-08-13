@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
+import global1 from "../global1";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -74,15 +75,15 @@ const EmptyState = styled.p`
   padding: 2rem;
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0;
+const colid = parseInt(global1.colid) || 0;
 
 export default function FacultyViewCourseRatings() {
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const role = localStorage.getItem("user_role");
-      const name = localStorage.getItem("user_name");
+      const role = global1.user_role;
+      const name = global1.user_name;
       console.log("Sending headers:", {
     "x-user-role": role,
     "x-user-name": name

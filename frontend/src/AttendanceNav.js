@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import global1 from "./global1";
 
 // Styled Components
 const AppContainer = styled.div`
@@ -206,7 +207,7 @@ const CustomLink = ({ to, children, icon: Icon, location }) => {
 
 export default function AttendanceNav() {
   const location = useLocation();
-  const userRole = localStorage.getItem("user_role") || "Student";
+  const userRole = global1.user_role || "Student";
 
   const handleDashboardClick = (e) => {
     e.preventDefault();

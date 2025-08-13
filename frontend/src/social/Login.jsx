@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from '../services/api';
+import global1 from "./global1";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -30,9 +31,9 @@ export default function Login() {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.access_token);
-      localStorage.setItem("role", data.role);
-      localStorage.setItem("name", data.name);
+      global1.token = data.access_token;
+      global1.role = data.role;
+      global1.name = data.name;
       showAlert("Login successful", "success");
       navigate("/discussions");
 

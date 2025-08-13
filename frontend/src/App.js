@@ -17,6 +17,7 @@ import LandingPage from "./LandingPage";
 import FormBuilder from "./components/form/FormBuilder";
 import FormFiller from "./components/form/FormFiller";
 import FormSubmissions from "./components/form/FormSubmissions";
+import global1 from "./global1";
 
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
@@ -245,7 +246,7 @@ const FormIcon = () => (
 );
 
 function App() {
-  const userRole = localStorage.getItem("user_role") || "Student";
+  const userRole = global1.user_role || "Student";
   const location = useLocation();
 
   const CustomLink = ({ to, children, icon: Icon }) => {

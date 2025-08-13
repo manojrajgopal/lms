@@ -1,7 +1,9 @@
 // src/DebugView.jsx
+import global1 from "./global1";
+
 function DebugView() {
-  const quizzes = JSON.parse(localStorage.getItem("quizzes") || "[]");
-  const assignments = JSON.parse(localStorage.getItem("assignments") || "[]");
+  const quizzes = global1.quizzes || [];
+  const assignments = global1.assignments || [];
 
   return (
     <div>

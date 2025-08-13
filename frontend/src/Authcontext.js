@@ -2,12 +2,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import api from "./services/api";
 import axios from "axios";
+import global1 from "./global1";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(
-    localStorage.getItem("authenticated") === "true"
+    global1.authenticated === "true"
   );
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
     // Only check if we have a token
-    const token = localStorage.getItem("token");
+    const token = global1.token;
     if (token) check();
     else setLoading(false);
   }, []);

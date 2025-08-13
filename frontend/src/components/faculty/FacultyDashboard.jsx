@@ -3,6 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const DashboardContainer = styled.div`
@@ -226,7 +227,7 @@ const itemVariants = {
   }
 };
 
-const colid = parseInt(localStorage.getItem('colid'), 10);
+const colid = parseInt(global1.colid, 10);
 
 function FacultyDashboard() {
   const [submissions, setSubmissions] = useState({ quizzes: [], assignments: [] });

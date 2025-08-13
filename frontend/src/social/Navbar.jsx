@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import global1 from "../global1";
 
 // Wrapper
 const NavbarWrapper = styled.div`
@@ -232,7 +233,7 @@ export default function Navbar() {
   const [role, setRole] = useState("");
 
   useEffect(() => {
-    const r = localStorage.getItem("user_role");
+    const r = global1.user_role; 
     setRole(r);
   }, []);
 

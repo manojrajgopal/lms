@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from "../services/api";
 import axios from "axios";
+import global1 from "../global1";
 
 // Loading animation keyframes
 const spin = keyframes`
@@ -174,7 +175,8 @@ export default function UploadPage() {
       return;
     }
 
-    const colid = localStorage.getItem("colid");
+    const colid = parseInt(global1.colid) || 0;
+    
     console.log("colid:", colid);
 
     const fd = new FormData();

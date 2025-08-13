@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
+import global1 from "../global1";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -125,7 +126,7 @@ const EmptyState = styled.div`
   font-size: 1rem;
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0; // Default to 0 if not set
+const colid = parseInt(global1.colid) || 0; // Default to 0 if not set
 
 export default function FacultyAnnouncements() {
   const [form, setForm] = useState({ title: "", message: "" });
@@ -151,8 +152,8 @@ export default function FacultyAnnouncements() {
       return;
     }
     try {
-      const name = localStorage.getItem("user_name") || "Anonymous User";
-      const role = localStorage.getItem("user_role") || "Faculty";
+      const name = global1.user_name || "Anonymous User";
+      const role = global1.user_role || "Faculty";
       await fetch(`${BASE_URL}announcements`, {
         method: "POST",
         headers: {

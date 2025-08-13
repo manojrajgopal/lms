@@ -1,9 +1,9 @@
+import global1 from "./global1";
+
 // src/utils/auth.js
 export const checkAuth = () => {
-  const token = localStorage.getItem('token');
-  const role = localStorage.getItem('role');
   return {
-    isAuthenticated: !!token,
-    role: role || 'Student'
+    isAuthenticated: !!global1.token,
+    role: global1.user_role || 'Student'
   };
 };

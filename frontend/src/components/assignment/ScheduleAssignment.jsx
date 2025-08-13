@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import * as XLSX from 'xlsx';
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const Container = styled.div`
@@ -350,7 +351,7 @@ const RemoveFileButton = styled.button`
   font-size: 0.8rem;
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10);
+const colid = parseInt(global1.colid) || 0;
 
 // Animation variants
 const questionVariants = {

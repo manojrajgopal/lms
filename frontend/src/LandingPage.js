@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import global1 from "./global1";
 
 const LandingContainer = styled.div`
   max-width: 1200px;
@@ -79,7 +80,7 @@ const IconWrapper = styled.div`
   }
 `;
 
-const userRole = (localStorage.getItem("user_role") || "student").toLowerCase();
+const userRole = (global1.user_role || "student").toLowerCase();
 
 const QuizIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -131,12 +132,11 @@ const StudentIcon = () => (
 
 
 function LandingPage() {
-  const userRole = localStorage.getItem("user_role") || "Student";
+  const userRole = global1.user_role || "Student";
   
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem("authenticated");
-    if (!isAuthenticated) {
-      window.location.href = "/auth"; // force redirect
+    if (!global1.authenticated) {
+      window.location.href = "/auth";
     }
   }, []);
 
@@ -246,8 +246,9 @@ function LandingPage() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
-            localStorage.clear();
-            window.location.href = "/auth/login-options"; // redirect after logout
+            // Clear all global1 properties
+            Object.keys(global1).forEach(key => delete global1[key]);
+            window.location.href = "/auth/login-options";
           }}
         >
           <IconWrapper role={userRole}>

@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 const Container = styled(motion.div)`
   max-width: 1200px;
@@ -194,7 +195,7 @@ const ScoreHighlight = styled(motion.div)`
   font-weight: 600;
 `;
 
-const colid = parseInt(localStorage.getItem("colid"));
+const colid = parseInt(global1.colid) || 0;
 
 function Leaderboard() {
   const [leaderboardData, setLeaderboardData] = useState([]);

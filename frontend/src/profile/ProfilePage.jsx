@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import api from "../services/api";
 import { BASE_URL } from "../services/api";
 import { AnimatePresence } from "framer-motion";
+import global1 from "../global1";
 
 // Styled Components
 const ProfileContainer = styled.div`
@@ -477,7 +478,7 @@ function ProfilePage() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const userRole = (localStorage.getItem("user_role") || "student").toLowerCase();
+  const userRole = (global1.user_role || "student").toLowerCase();
 const [showPasswordChange, setShowPasswordChange] = useState(false);
 const [currentPassword, setCurrentPassword] = useState('');
 const [newPassword, setNewPassword] = useState('');
@@ -489,14 +490,14 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user_id = localStorage.getItem("user_id");
+        const user_id = global1.user_id;
         if (!user_id) {
           navigate("/auth/login-options");
           return;
         }
 
-        const email = localStorage.getItem("user_email");
-        const name = localStorage.getItem("user_name");
+        const email = global1.user_email;
+        const name = global1.user_name;
 
         const query = new URLSearchParams({ user_id, email, name }).toString();
         const response = await api.get(`${BASE_URL}api/user-profile?${query}`);

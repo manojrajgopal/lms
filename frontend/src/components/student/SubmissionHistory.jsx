@@ -3,6 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const HistoryContainer = styled.div`
@@ -153,7 +154,7 @@ const itemVariants = {
 function SubmissionHistory() {
   const [submissions, setSubmissions] = useState({ quizzes: [], assignments: [] });
   const [loading, setLoading] = useState(true);
-  const userId = localStorage.getItem("user_id");
+  const userId = global1.user_id;
 
   useEffect(() => {
     setLoading(true);

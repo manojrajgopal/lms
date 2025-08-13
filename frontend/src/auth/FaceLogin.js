@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
 import axios from "axios";
-
+import global1 from "../global1";
 
 const LoginContainer = styled.div`
   max-width: 500px;
@@ -209,12 +209,13 @@ const FaceLogin = () => {
       if (res.data.token) {
         const role = res.data.role === "faculty" ? "Faculty" : "Student";
 
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("authenticated", "true");
-        localStorage.setItem("user_id", res.data.id);
-        localStorage.setItem("user_name", res.data.name);
-        localStorage.setItem("user_role", role);
-        localStorage.setItem("colid", res.data.colid || "N/A");
+        global1.authenticated = true;
+        global1.token = res.data.token || "session";
+        global1.user_role = role;
+        global1.user_id = res.data.user_id;
+        global1.user_name = res.data.name;
+        global1.colid = res.data.colid;
+        
         console.log("colid", res.data.colid);
         
         setAuthenticated(true);

@@ -1,19 +1,21 @@
-// src/utils/auth.js
+import global1 from "../global1";
+
 export const checkAuth = () => {
-  const token = localStorage.getItem('token');
-  const role = localStorage.getItem('role');
   return {
-    isAuthenticated: !!token,
-    role: role || 'Student'
+    isAuthenticated: !!global1.token,
+    role: global1.role || 'Student'
   };
 };
 
 export const login = (token, role) => {
-  localStorage.setItem('token', token);
-  localStorage.setItem('role', role);
-  localStorage.setItem('user_id', token.split('.')[0]); // Simple user ID extraction
+  global1.token = token;
+  global1.role = role;
+  global1.user_id = token.split('.')[0]; // Simple user ID extraction
 };
 
 export const logout = () => {
-  localStorage.clear();
+  // Clear all global1 properties
+  Object.keys(global1).forEach(key => {
+    delete global1[key];
+  });
 };

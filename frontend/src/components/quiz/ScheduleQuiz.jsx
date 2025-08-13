@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import * as XLSX from 'xlsx';
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const Container = styled.div`
@@ -320,7 +321,7 @@ function ScheduleQuiz() {
       return;
     }
 
-    const colid = localStorage.getItem("colid");
+    const colid = parseInt(global1.colid) || 0;
 
     // Prepare the data in the correct format
     const payload = {

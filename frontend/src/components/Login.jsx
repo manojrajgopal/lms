@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import axios from 'axios';
+import global1 from '../global1';
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -12,8 +13,8 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await axios.auth.login(credentials);
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('role', response.role);
+      global1.token = response.token;
+      global1.role = response.role;
       navigate(response.role === 'Faculty' ? '/Faculty/dashboard' : '/');
     } catch (error) {
       alert('Login failed');

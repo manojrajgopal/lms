@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
+import global1 from "../global1";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -86,7 +87,7 @@ const EmptyState = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 `;
 
-const colid = parseInt(localStorage.getItem("colid")) || null;
+const colid = parseInt(global1.colid) || 0;
 
 export default function StudentAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);

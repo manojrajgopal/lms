@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const Container = styled.div`
@@ -176,7 +177,7 @@ const URLBox = styled.div`
   word-break: break-all;
 `;
 
-const colid = parseInt(localStorage.getItem('colid'), 10);
+const colid = parseInt(global1.colid, 10);
 
 const RadioLabel = styled(CheckboxLabel)``;
 const RadioInput = styled(CheckboxInput)``;

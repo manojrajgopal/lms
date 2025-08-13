@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
+import global1 from "../global1";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -110,7 +111,7 @@ const JoinLink = styled.a`
   }
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0;
+const colid = parseInt(global1.colid) || 0;
 
 export default function StudentMeetings() {
   const [meetings, setMeetings] = useState([]);

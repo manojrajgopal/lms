@@ -4,6 +4,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { BASE_URL } from '../../services/api';
+import global1 from "../../global1";
 
 // Styled Components
 const fadeIn = keyframes`
@@ -425,7 +426,7 @@ const FullscreenWarning = styled.div`
   }
 `;
 
-const colid = parseInt(localStorage.getItem('colid'), 10);
+const colid = parseInt(global1.colid, 10);
 
 // Add this utility function at the top of your file
 const convertUTCToIST = (utcDateString) => {
@@ -473,17 +474,12 @@ function TakeQuiz() {
 
 useEffect(() => {
 
-  const storedUserId = localStorage.getItem('user_id') || `Student_${Math.random().toString(36).substr(2, 9)}`;
-  localStorage.setItem('quizUserId', storedUserId);
-  setUserId(storedUserId);
-
-const rawAttempts = localStorage.getItem('quizAttempts');
-const parsedAttempts = rawAttempts ? JSON.parse(rawAttempts) : {};
-if (!parsedAttempts[storedUserId]) {
-  parsedAttempts[storedUserId] = {};
-  localStorage.setItem('quizAttempts', JSON.stringify(parsedAttempts));
+  const storedUserId = global1.user_id || `Student_${Math.random().toString(36).substr(2, 9)}`;
+global1.quizUserId = storedUserId;
+global1.quizAttempts = global1.quizAttempts || {};
+if (!global1.quizAttempts[storedUserId]) {
+  global1.quizAttempts[storedUserId] = {};
 }
-setAttempts(parsedAttempts[storedUserId]);
 
 
   Promise.all([
@@ -729,9 +725,8 @@ const handleSelect = async (quiz) => {
 
   setAttempts(updatedUserAttempts);
 
-  const fullAttempts = JSON.parse(localStorage.getItem("quizAttempts")) || {};
-  fullAttempts[userId] = updatedUserAttempts;
-  localStorage.setItem("quizAttempts", JSON.stringify(fullAttempts));
+  global1.quizAttempts = global1.quizAttempts || {};
+  global1.quizAttempts[userId] = updatedUserAttempts;
 
   // Clear quiz state
   setSelectedQuiz(null);

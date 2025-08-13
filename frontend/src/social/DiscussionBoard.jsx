@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
+import global1 from "../global1";
 
 // Styled Components
 const PageContainer = styled.div`
@@ -203,14 +204,14 @@ const StudentBadge = styled.span`
   margin-left: 0.5rem;
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0; // Default to 0 if not set
+const colid = parseInt(global1.colid) || 0; // Default to 0 if not set
 
 export default function DiscussionBoard() {
   const [posts, setPosts] = useState([]);
   const [form, setForm] = useState({ title: "", body: "" });
   const [commentText, setCommentText] = useState({});
-  const name = localStorage.getItem("user_id") || "Anonymous User";
-  const role = localStorage.getItem("user_role") || "Faculty";
+  const name = global1.user_id || "Anonymous User";
+  const role = global1.user_role || "Faculty";
 
   const showToast = (message, type) => {
     // Simple alert as a replacement for toast
@@ -235,7 +236,7 @@ export default function DiscussionBoard() {
     }
 
     try {
-      const token = localStorage.getItem('token');
+      const token = global1.token;
       await fetch(`${BASE_URL}discussions`, {
         method: "POST",
         headers: {
@@ -265,9 +266,9 @@ export default function DiscussionBoard() {
     if (!text) return;
 
     try {
-      const token = localStorage.getItem('token');
-      const name = localStorage.getItem("user_name") || "Anonymous User";
-      const role = localStorage.getItem("user_role") || "Student";
+      const token = global1.token;
+      const name = global1.user_name || "Anonymous User";
+      const role = global1.user_role || "Student";
 
       await fetch(`${BASE_URL}discussions/${id}/comment`, {
         method: "POST",

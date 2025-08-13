@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
-
+import global1 from "../global1";
 
 const PageContainer = styled.div`
   background: linear-gradient(to bottom right, #f7fafc, #ebf8ff);
@@ -112,7 +112,7 @@ const SubmitButton = styled(motion.button)`
   }
 `;
 
-const colid = parseInt(localStorage.getItem("colid"), 10) || 0;
+const colid = parseInt(global1.colid) || 0;
 
 export default function StudentFeedback() {
   const [text, setText] = useState("");
@@ -127,7 +127,7 @@ export default function StudentFeedback() {
   useEffect(() => {
     const fetchFaculty = async () => {
       try {
-        const token = localStorage.getItem("token"); 
+        const token = global1.token;
         const response = await fetch(`${BASE_URL}users?role=faculty&colid=${colid}`, {
           headers: {
             "Authorization": `Bearer ${token}`
@@ -145,7 +145,7 @@ export default function StudentFeedback() {
   }, []);
 
 const submitFeedback = async () => {
-  const studentId = localStorage.getItem("user_id");
+  const studentId = global1.user_id;
 
   if (!selectedFaculty || !text.trim() || rating === 0) {
     showAlert("Please select faculty, give rating and write feedback", "warning");
@@ -155,7 +155,7 @@ const submitFeedback = async () => {
   console.log("📤 Sending student_id:", studentId);
 
   try {
-    const token = localStorage.getItem("token"); 
+    const token = global1.token;
     const response = await fetch(`${BASE_URL}feedback`, {
       method: "POST",
       headers: {

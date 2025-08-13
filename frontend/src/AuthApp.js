@@ -8,6 +8,7 @@ import AuthNav from "./AuthNav";
 import api from "./services/api";
 import { AuthContext } from "./Authcontext";
 import axios from "axios";
+import global1 from "./global1";
 
 export default function AuthApp() {
   const [authenticated, setAuthenticated] = useState(null);
@@ -16,11 +17,11 @@ export default function AuthApp() {
     axios.get("/check-auth")
       .then(() => {
         setAuthenticated(true);
-        localStorage.setItem("authenticated", "true");
+        global1.authenticated = true;
       })
       .catch(() => {
         setAuthenticated(false);
-        localStorage.removeItem("authenticated");
+        global1.authenticated = false;
       });
   };
 

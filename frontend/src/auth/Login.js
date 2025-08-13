@@ -6,7 +6,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import { BASE_URL } from '../services/api';
 import axios from "axios";
-
+import global1 from "../global1";
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -130,14 +130,13 @@ export default function Login() {
         if (res.data?.success && res.data?.token) {
           const role = res.data.role === "faculty" ? "Faculty" : "Student";
           
-          localStorage.setItem("authenticated", "true");
-          localStorage.setItem("token", res.data.token || "session");
-          localStorage.setItem("authenticated", "true");
-          localStorage.setItem("user_role", role);
-          localStorage.setItem("user_id", res.data.user_id);
-          localStorage.setItem("user_name", res.data.name);
-          localStorage.setItem("colid", res.data.colid);
-          console.log("colid", res.data.colid);
+            global1.authenticated = true;
+            global1.token = res.data.token || "session";
+            global1.user_role = role;
+            global1.user_id = res.data.user_id;
+            global1.user_name = res.data.name;
+            global1.colid = res.data.colid;
+            console.log("colid", res.data.colid);
           
           setAuthenticated(true);
           window.location.href = "/";
